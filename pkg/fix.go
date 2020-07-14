@@ -76,6 +76,7 @@ func (o *FixOptions) Validate() error {
 func (o *FixOptions) Run() error {
 	start := time.Now()
 	pkgs, err := packages.Load(&packages.Config{
+		BuildFlags: []string{"-tags=k8srequired"},
 		Mode:  packages.NeedName | packages.NeedFiles | packages.NeedCompiledGoFiles | packages.NeedTypes | packages.NeedTypesInfo | packages.NeedSyntax | packages.NeedDeps,
 		Tests: true,
 		Dir:   o.Dir,
@@ -97,6 +98,7 @@ func (o *FixOptions) Run() error {
 	for _, pkg := range pkgs {
 		dec := decorator.NewDecorator(pkg.Fset)
 		for i, filename := range pkg.CompiledGoFiles {
+			fmt.Println(filename)
 			if !strings.HasSuffix(filename, ".go") {
 				continue
 			}
