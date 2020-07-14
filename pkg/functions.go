@@ -50,6 +50,7 @@ var generatedClientPrefixes = []string{
 	"k8s.io/client-go/kubernetes/typed/",
 	"k8s.io/apiextensions-apiserver/pkg/client/clientset/clientset/typed/",
 	"k8s.io/kube-aggregator/pkg/client/clientset_generated/clientset/typed/",
+	"github.com/giantswarm/apiextensions/pkg/clientset/versioned/typed/",
 }
 
 var transforms = []struct {

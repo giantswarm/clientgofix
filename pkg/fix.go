@@ -76,9 +76,10 @@ func (o *FixOptions) Validate() error {
 func (o *FixOptions) Run() error {
 	start := time.Now()
 	pkgs, err := packages.Load(&packages.Config{
-		Mode:  packages.NeedName | packages.NeedFiles | packages.NeedCompiledGoFiles | packages.NeedTypes | packages.NeedTypesInfo | packages.NeedSyntax | packages.NeedDeps,
-		Tests: true,
-		Dir:   o.Dir,
+		BuildFlags: []string{"-tags=k8srequired"},
+		Mode:       packages.NeedName | packages.NeedFiles | packages.NeedCompiledGoFiles | packages.NeedTypes | packages.NeedTypesInfo | packages.NeedSyntax | packages.NeedDeps,
+		Tests:      true,
+		Dir:        o.Dir,
 	}, o.Packages...)
 	if err != nil {
 		return fmt.Errorf("error loading packages: %w", err)
